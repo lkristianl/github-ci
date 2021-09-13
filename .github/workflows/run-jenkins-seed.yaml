@@ -6,7 +6,7 @@ name: run-jenkins-seed
 #  push:
 #    branches:
 #      - production
-
+#
 env:
   JENKINS_HOST: https://jenkins.bodeboca.com
   JENKINS_JOB: admin/seed
