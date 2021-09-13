@@ -1,12 +1,14 @@
-## Github actions to execute jobs based on branch
+## Github actions to execute  deploy-ENV jobs based on branch
 
 name: deploy_ENV
 
 on:
   push:
     branches:
-#      - dev
-      - production
+      - stage
+
+env:
+  JENKINS_HOST: https://jenkins.bodeboca.com
 
 jobs:
   launch_jenkins_deploy:
@@ -20,18 +22,15 @@ jobs:
           key: ${{ github.ref }}
           map: |
             {
-              "dev": {
-                "JENKINS_JOB": "${{ secrets.JENKINS_JOB_DEV }}"
-              },
-              "production": {
-                "JENKINS_JOB": "${{ secrets.JENKINS_JOB_STG }}"
+              "stage": {
+                "JENKINS_JOB": "${{ secrets.BB_JENKINS_JOB_DEPLOY_STAGE }}"
               }
             }
       -
         name: Trigger Jenkins Job
-        uses: sbitio/trigger-jenkins-job@v1.2
+        uses: sbitio/trigger-jenkins-job@v1.3
         with:
-          JENKINS_USER: ${{ secrets.JENKINS_USER }}
-          JENKINS_TOKEN: ${{ secrets.JENKINS_TOKEN }}
-          JENKINS_HOST: ${{ secrets.JENKINS_HOST }}
+          JENKINS_USER: ${{ secrets.BB_JENKINS_USER }}
+          JENKINS_TOKEN: ${{ secrets.BB_JENKINS_TOKEN }}
+          JENKINS_HOST: ${{ env.JENKINS_HOST }}
           JENKINS_JOB: ${{ env.JENKINS_JOB }}

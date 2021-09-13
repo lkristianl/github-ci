@@ -2,7 +2,7 @@
 
 name: deploy_ENV
 
-on: pull_request
+#on: pull_request
 
 env:
   JENKINS_HOST: https://jenkins.bodeboca.com

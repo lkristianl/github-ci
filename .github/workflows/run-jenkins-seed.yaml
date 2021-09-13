@@ -2,10 +2,10 @@
 
 name: run-jenkins-seed
 
-on:
-  push:
-    branches:
-      - production
+#on:
+#  push:
+#    branches:
+#      - production
 
 env:
   JENKINS_HOST: https://jenkins.bodeboca.com
